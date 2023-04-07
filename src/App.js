@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
 function App() {
+  const [value, setValue] = useState("");
+
+  const inputValue = (e) => {
+    setValue(e.target.value);
+  };
+
+  const send = () => {
+    window.ue.testwebbrowser.testfn(value);
+    console.log(value);
+  };
+  console.log(value);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <input
+          style={{ width: 500, fontSize: 18, marginRight: 5 }}
+          type="text"
+          onChange={inputValue}
+          value={value}
+        />
+        <button onClick={send}>전송</button>
+      </div>
     </div>
   );
 }
