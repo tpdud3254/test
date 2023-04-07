@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [value, setValue] = useState("");
+  const [receiveData, setReceiveData] = useState("");
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const inputValue = (e) => {
     setValue(e.target.value);
@@ -9,9 +14,14 @@ function App() {
 
   const send = () => {
     window.ue.testwebbrowser.testfn(value);
-    console.log(value);
   };
-  console.log(value);
+
+  const getData = () => {
+    window.ue.testwebbrowser.testfunc().then(function (returnValue) {
+      setReceiveData(returnValue);
+    });
+  };
+
   return (
     <div>
       <div style={{ display: "flex", flexDirection: "row" }}>
@@ -21,8 +31,9 @@ function App() {
           onChange={inputValue}
           value={value}
         />
-        <button onClick={send}>전송</button>
+        <button onClick={send}>값 전송</button>
       </div>
+      <div>receive data : {receiveData}</div>
     </div>
   );
 }
